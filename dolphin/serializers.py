@@ -14,20 +14,33 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
+    category_id = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+
+    )
     category = serializers.PrimaryKeyRelatedField(
-        read_only=True
+        queryset=Category.objects.all(),
+        source='category_id'
+
     )
 
     class Meta:
         model = Item
-        fields = ('name', 'price', 'description', 'category',)
+        fields = ('name', 'price', 'description', 'category', 'category_id',)
 
 
 class DetailSerializer(serializers.ModelSerializer):
+    item_id = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+
+    )
     item = serializers.PrimaryKeyRelatedField(
-        read_only=True
+        queryset=Item.objects.all(),
+        source='item_id'
+
     )
 
     class Meta:
         model = Detail
-        fields = ('measurements', 'item', 'materials', 'styles', 'brand',)
+        fields = ('measurements', 'item', 'materials',
+                  'styles', 'brand', 'item_id',)
