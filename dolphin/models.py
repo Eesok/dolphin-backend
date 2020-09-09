@@ -18,6 +18,7 @@ class Item(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     item_image = models.TextField()
+    item_photo = models.TextField()
 
     def __str__(self):
         return self.name
