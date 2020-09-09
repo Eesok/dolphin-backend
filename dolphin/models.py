@@ -12,24 +12,26 @@ class Category(models.Model):
 
 
 class Item(models.Model):
-    name = models.CharField(max_length=100)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name='items')
+    name = models.CharField(max_length=100, default='no item name')
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     item_image = models.TextField()
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name='items')
 
     def __str__(self):
         return self.name
 
 
 class Detail(models.Model):
-    measurements = models.CharField(max_length=100)
-    materials = models.CharField(max_length=100)
-    styles = models.CharField(max_length=100)
-    brand = models.CharField(max_length=100)
+    measurements = models.CharField(
+        max_length=100, default='no detail measurements')
+    materials = models.CharField(
+        max_length=100, default='no detail materials')
+    styles = models.CharField(max_length=100, default='no detail styles')
+    brand = models.CharField(max_length=100, default='no detail brand')
     item = models.ForeignKey(
         Item, on_delete=models.CASCADE, related_name='details')
 
     def __str__(self):
-        return str(self.item)
+        return f'{self.measurements}, {self.materials}, {self.styles}, {self.brand}'
