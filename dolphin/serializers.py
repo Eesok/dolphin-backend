@@ -23,11 +23,15 @@ class ItemSerializer(serializers.ModelSerializer):
         # source='category_id'
 
     )
+    details = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
+    )
 
     class Meta:
         model = Item
         fields = ('id', 'name', 'price', 'description',
-                  'category',)
+                  'category', 'details')
 
 
 class DetailSerializer(serializers.ModelSerializer):
