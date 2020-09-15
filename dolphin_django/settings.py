@@ -72,6 +72,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'https://dolphinvintage.herokuapp.com/'
 )
 
 JWT_AUTH = {
